@@ -1,0 +1,101 @@
+NOTE: The Ultimate Quiz X only supports Python, for now. Check the README.md file so you know how to play it.
+DO NOT LOOK AT THE ANSWERS IF YOU DO NOT WANT TO GET SPOILED!
+
+The code: 
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+# -------------------------
+def new_game():
+
+    guesses = []
+    correct_guesses = 0
+    question_num = 1
+
+    for key in questions:
+        print("-------------------------")
+        print(key)
+        for i in options[question_num-1]:
+            print(i)
+        guess = input("Enter (A, B, C, or D): ")
+        guess = guess.upper()
+        guesses.append(guess)
+
+        correct_guesses += check_answer(questions.get(key), guess)
+        question_num += 1
+
+    display_score(correct_guesses, guesses)
+
+# -------------------------
+def check_answer(answer, guess):
+
+    if answer == guess:
+        print("You are right!")
+        return 1
+    else:
+        print("You are wrong!")
+        return 0
+
+# -------------------------
+def display_score(correct_guesses, guesses):
+    print("-------------------------")
+    print("Results")
+    print("-------------------------")
+
+    print("Answers: ", end="")
+    for i in questions:
+        print(questions.get(i), end=" ")
+    print()
+
+    print("Guesses: ", end="")
+    for i in guesses:
+        print(i, end=" ")
+    print()
+
+    score = int((correct_guesses/len(questions))*100)
+    print("Your score is: "+str(score)+"%")
+
+# -------------------------
+def play_again():
+
+    response = input("Do you want to play again? (yes or no): ")
+    response = response.upper()
+
+    if response == "Yes":
+        return True
+    else:
+        return False
+# -------------------------
+
+
+questions = {
+ "Welcome to The Ultimate Quiz X. Press A to continue.: ": "A",
+ "Some questions make no sense, so proceed with caution.: ": "A",
+ "Bill Gates just gave you 1 bil dollars. What are you doing with them?: ": "C",
+ "You have cancer. What are you doing now?: ": "B",
+ "You are failing all your classes. What is your plan right now?: ": "D",
+ "You are at McDonald's, but you want to go somewhere else. Where you going?: ": "B",
+ "No one likes/loves you. What are your thoughts?: ": "A",
+ "Because you decided to kill a dog, you got arrested. What are you going to do?: ": "D",
+ "Someone asks you if they can use your phone to call someone. What are you doing?: ": "C",
+ "Thank you for playing. This is just a proto-type. Press A to continue.: ": "A",
+ "Samsung or iPhone?: ": "D"
+}
+
+options = [["A. Continue."],
+          ["A. Continue."],
+          ["A. Send them to charity.", "B. Buy NFTs.", "C. Buy VBucks.", "D. Invest to make more."],
+          ["A. Make the best while you can.","B. Make 100 videos on TikTok about your cancer and your routine with it.. ", "C. Do nothing.", "D. Try beating it."],
+          ["A. Start studying.", "B. Don't give a shit.", "C. Both.", "D. Nothing, continue what you are doing and remain a Giga Chad."],
+          ["A. Go to KFC.", "B. Go to Burger King.", "C. Go to Chick-fil-A.", "D. Stay there."],
+          ["A. Don't give a shit.", "B. Kill yourself.", "C. Kill them all.", "D. Run away somewhere else."],
+          ["A. Absolutely nothing.", "B. Be a good citizen and stay there.", "C. Poop.", "D. Try to escape, maybe you'll get out."],
+          ["A. Sure, what could happen?", "B. Tell them you don't have battery.", "C. Fuck no.", "D. You don't have a phone."],
+          ["A. Samsung.", "B. iPhone.", "C. Both.", "D. Nokia."],]
+
+new_game()
+
+while play_again():
+    new_game()
+
+print("Thank you for playing. Remember that there is alot to come in the future.")
